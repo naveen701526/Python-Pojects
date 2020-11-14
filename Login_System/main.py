@@ -1,5 +1,6 @@
 import os
-import platform
+import platform, time
+from getpass import getpass
 
 def clear():
     if 'linux' in platform.system().lower(): 
@@ -27,8 +28,9 @@ if account == '1':
     print('Welcome to Register Board')
     user_name = input('Enter a username \n')
     email_id = input('Enter a valid email id \n')
-    password = input('Enter a password \n')
-    confirm_password = input('Repeat password again \n')
+    password = getpass('Enter a password: ')
+    confirm_password = getpass('Repeat Password: ')
+
     if password != confirm_password:
         cleared = False
         while not cleared:
@@ -53,13 +55,15 @@ if account == '2':
         
         print('welcome to login board'.title())
         user_name = input('Enter your user name!\n')
-        password = input('Enter your password \n')
+        password = getpass('Enter a password: ')
         f = open("accounts.txt", "r")
         content = f.read()
         if password not in content:
             print('Wrong password try again!!')
+            time.sleep(2)
         elif user_name not in content:
             print('wrong user id try again!!')
+            time.sleep(2)
         else:
             print('congratulations you\'re logged in!!')
             exit_loop = True
